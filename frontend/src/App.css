@@ -1,0 +1,109 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todoApp{
+    height: 90vh;
+    width: 90vw;
+}
+
+.addTodo{
+    height: 30%;
+    width: 100%;
+    background-color: #adff2f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textInput{
+    height: 75px;
+    width: 500px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    padding-left: 20px;
+    font-size: 30px;
+}
+
+.addButton{
+    margin: 5px;
+    height: 75px;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.todos{
+    height: 70%;
+    width: 100%;
+    background-color: #adff2f;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.todo{
+    height: 70px;
+    width: 850px;
+    background-color: white;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.todo:hover{
+    height:100px ;
+    transition: 0.5s;
+}
+
+.todoButtons{
+    height: 70px;
+    width: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.todoText{
+    height: 70px;
+    width: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.deleteButton{
+    height: 50px;
+    width: 70px;
+    margin-right:20px;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.deleteButton:hover{
+    transition: 0.8s;
+    border: none;
+    background-color: #d1cfcf;
+    font-size: 20px;
+}
+
+.doneButton{
+    height: 25px;
+    width: 40px;
+    margin-right:20px;
+}
+
+.doneButton:hover{
+    height: 35px;
+    transition: 0.4s;
+}
+
+.todoText{
+    font-size: 30px;
+}
