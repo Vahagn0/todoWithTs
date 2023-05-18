@@ -28,7 +28,7 @@ type TodoProps = {
           <span className='todoText'>{data.text}</span>
         </div>
         <div className='todoButtons'>
-          <input className='doneButton' type='checkbox' onClick={handleChange}/>
+          <input className='doneButton' type='checkbox' onClick={handleChange} readOnly checked={data.done}/>
           <button className='deleteButton' onClick={handleDelete}>x</button>
         </div>
       </div>

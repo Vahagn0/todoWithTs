@@ -42,6 +42,16 @@ app.delete('/delete', jsonParser,async(req: Request, res: Response) => {
   res.send("200")
 });
 
+app.patch('/done', jsonParser,async(req: Request, res: Response) => {
+  const id: String = req.body.todo._id
+  const done: Boolean = req.body.todo.done
+  await Todo.updateOne({_id : id}, {done: !done});
+  const todo = await Todo.findOne({_id : id})
+  console.log(todo,"do")
+  res.send("200")
+});
+
+
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });

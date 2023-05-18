@@ -10,36 +10,36 @@ type ITodo = {
 function App() {
   const [todos,setTodos] = useState<ITodo[]>([]);
   const [txt,setText] = useState("")
+  const [render,setRender] = useState(0)
 
   useEffect(()=>{
     fetch("http://localhost:4000")
     .then(response => response.json())
-    .then(data => setTodos(data));
-  },[])
+    .then(data => {
+      setTodos(data)
+    });
+  },[render])
 
  const addTodo = useCallback(
   ()=>{
-    setTodos(currentTodos => [
-      ...currentTodos,
-      {
-        text: txt,
-        done: false
-      },
-    ]);
-
-    // const requestOptions = {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({
-    //       todo: {
-    //         text: txt,
-    //         done: false
-    //       }
-    //     })
-    // };
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          todo: {
+            text: txt,
+            done: false
+          }
+        })
+    };
     
-    // fetch('http://localhost:4000/add', requestOptions)
-    //     .then(response => response.json())
+    fetch('http://localhost:4000/add', requestOptions)
+        .then(response => response.json())
+        .then(status => {
+          if (status == 200){
+            setRender(currentRender => currentRender + 1)
+          } 
+        })
   }, [txt]);
 
   const deleteTodo = useCallback((todo: ITodo) => () => {
@@ -54,24 +54,32 @@ function App() {
   
   fetch('http://localhost:4000/delete', requestOptions)
       .then(response => response.json())
+      .then(status => {
+        if(status == 200){
+          setRender(currentRender => currentRender + 1)
+        }
+      })
 
-      debugger
-    setTodos(todos.filter((item: ITodo)=> item.text != todo.text))
-
-  }, [todos])
+  }, [])
 
   const checkboxClick = useCallback((todo: ITodo) => () => {
-    debugger
-    const newTodos =  todos.map((item: ITodo)=>{
-      if(item.text == todo.text){
-        item.done = !item.done
-        return item 
-      }else{
-        return item
-      }
-    })
-    setTodos(newTodos)
-  }, [todos])
+    const requestOptions = {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        todo: todo
+      })
+  };
+  
+  fetch('http://localhost:4000/done', requestOptions)
+      .then(response => response.json())
+      .then(status =>{
+        if(status == 200){
+          setTodos([])
+          setRender(currentRender => currentRender + 1)
+        }
+      })
+  }, [])
 
   return (
     <>
